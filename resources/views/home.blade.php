@@ -96,7 +96,7 @@
                         'text_color' => 'text-green-100'
                     ],
                     [
-                        'link' => route('news'),
+                        'link' => route('news.index'),
                         'icon' => 'ri-news-line',
                         'title' => 'Berita',
                         'description' => 'Berita terkini dan informasi kegiatan sekolah',
@@ -183,7 +183,7 @@
                     <h2 class="text-3xl font-bold text-gray-900 mb-4">Berita Terbaru</h2>
                     <p class="text-lg text-gray-600">Informasi terkini seputar kegiatan dan pencapaian sekolah</p>
                 </div>
-                <a href="{{ route('news') }}" class="inline-flex items-center space-x-2 text-primary hover:text-blue-700 font-medium">
+                <a href="{{ route('news.index') }}" class="inline-flex items-center space-x-2 text-primary hover:text-blue-700 font-medium">
                     <span>Lihat Semua</span>
                     <div class="w-5 h-5 flex items-center justify-center">
                         <i class="ri-arrow-right-line"></i>
@@ -191,17 +191,17 @@
                 </a>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                @foreach(\App\Models\News::latest()->take(3)->get() as $news)
+                @foreach($news as $news_item)
                     <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                        <div class="h-48 bg-cover bg-center" style="background-image: url('{{ $news->image ? asset('storage/' . $news->image) : 'https://via.placeholder.com/400x300' }}')"></div>
+                        <div class="h-48 bg-cover bg-center" style="background-image: url('{{ $news_item->image ? asset('storage/' . $news_item->image) : 'https://via.placeholder.com/400x300' }}')"></div>
                         <div class="p-6">
                             <div class="flex items-center space-x-2 mb-3">
-                                <span class="px-3 py-1 bg-{{ $news->tag_color }} bg-opacity-10 text-{{ $news->tag_color }} text-xs font-medium rounded-full">{{ $news->tag }}</span>
-                                <span class="text-gray-500 text-sm">{{ $news->date->format('d F Y') }}</span>
+                                <span class="px-3 py-1 bg-{{ $news_item->tag_color }} bg-opacity-10 text-{{ $news_item->tag_color }} text-xs font-medium rounded-full">{{ $news_item->tag }}</span>
+                                <span class="text-gray-500 text-sm">{{ $news_item->date->format('d F Y') }}</span>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-primary transition-colors cursor-pointer">{{ $news->title }}</h3>
-                            <p class="text-gray-600 mb-4">{{ \Illuminate\Support\Str::limit($news->description, 100) }}</p>
-                            <a href="{{ route('news.show', $news->id) }}" class="inline-flex items-center space-x-2 text-primary hover:text-blue-700 font-medium">
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-primary transition-colors cursor-pointer">{{ $news_item->title }}</h3>
+                            <p class="text-gray-600 mb-4">{{ \Illuminate\Support\Str::limit($news_item->description, 100) }}</p>
+                            <a href="{{ route('news.show', $news_item->id) }}" class="inline-flex items-center space-x-2 text-primary hover:text-blue-700 font-medium">
                                 <span>Baca Selengkapnya</span>
                                 <div class="w-4 h-4 flex items-center justify-center">
                                     <i class="ri-arrow-right-line text-sm"></i>
