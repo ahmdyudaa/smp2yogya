@@ -23,7 +23,22 @@ class NewsResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('title')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('description')
+                    ->required()
+                    ->columnSpanFull(),
+                Forms\Components\FileUpload::make('image')
+                    ->image(),
+                Forms\Components\TextInput::make('tag')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('tag_color')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\DatePicker::make('date')
+                    ->required(),
             ]);
     }
 
