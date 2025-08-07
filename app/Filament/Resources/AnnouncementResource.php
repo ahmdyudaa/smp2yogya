@@ -23,7 +23,35 @@ class AnnouncementResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('title')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('description')
+                    ->required()
+                    ->columnSpanFull(),
+                Forms\Components\TextInput::make('icon')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('icon_bg')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('bg_color')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('border_color')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('tag')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('tag_color')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\DatePicker::make('date')
+                    ->required(),
+                Forms\Components\TextInput::make('category')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
